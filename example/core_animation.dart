@@ -1,22 +1,18 @@
 import 'dart:html';
+import 'dart:js';
 import 'package:polymer/polymer.dart';
+import 'package:core_elements/core_animation.dart';
 
-var player;
+var last;
 
 main() {
   initPolymer().run(() {
     Polymer.onReady.then((_) {
-      document.body.onClick.listen((e) {
-        clickAction(e);
-      });
+      document.body.onClick.listen(clickAction);
 
       document.body.addEventListener('core-animation-finish', (e) {
         print('core-animation-finish');
-        if (player) {
-          player.cancel();
-          player = null;
-          e.target.querySelector('span').text = 'polymer';
-        }
+        e.target.target.querySelector('span').text = 'polymer';
       });
     });
   });
@@ -25,14 +21,19 @@ main() {
 void clickAction(MouseEvent e) {
   var t = e.target;
   if ((e.target as HtmlElement).localName != 'button') return;
-
-  if (player) player.cancel();
-
   var a = t.querySelector('core-animation, core-animation-group');
+
+  if (last != null ) {
+    last.cancel();
+    last = null;
+  }
+
+
   if (a.id == 'custom-animation') a.customEffect = customAnimationFn;
 
   a.target = document.getElementById('target');
-  player = a.play();
+  a.play();
+  last = a;
 }
 
 // TODO(jakemac): Third argument here is always "fixme". What is up with that???

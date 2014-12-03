@@ -142,7 +142,7 @@ class CoreList extends PolymerElement {
    * @type boolean
    * @default false
    */
-   @published bool grid;
+   @published bool grid = false;
 
   /**
    *
@@ -221,7 +221,7 @@ class CoreList extends PolymerElement {
   double _rowMargin;
   List<StreamSubscription> _groupObservers;
   int _dir;
-  bool _needItemInit;
+  bool _needItemInit = false;
   Future _raf;
   int _viewportSize;
   int _upperBound;
@@ -354,7 +354,7 @@ class CoreList extends PolymerElement {
     } else {
       totalDelta = math.max(
           (totalDelta / _rowFactor) * _physicalAverage,
-          -_physicalOffset);
+          -_physicalOffset).round();
       _physicalOffset += totalDelta;
       _scrollTop = setScrollTop(_scrollTop + totalDelta);
     }
@@ -393,8 +393,10 @@ class CoreList extends PolymerElement {
 
     // `changes is List<ListChangeRecord>` does not work in Dart. We assume here
     // that if the first item is a ListChangeRecord then the rest is too.
+    var isListChangeRecords = false;
     if (changes is List && !changes.isEmpty && changes[0] is ListChangeRecord
         && !changes[0].object.isEmpty) {
+      isListChangeRecords = true;
       if (!_nestedGroups) {
         _adjustVirtualIndex(changes);
       }
@@ -410,7 +412,11 @@ class CoreList extends PolymerElement {
     }
 
     // Initialize data
-    initializeData(changes);
+    if (isListChangeRecords) {
+      initializeData(changes);
+    } else {
+      initializeData();
+    }
   }
 
   void initializeScrollTarget(target) {
@@ -482,7 +488,7 @@ class CoreList extends PolymerElement {
       for (var i = 0; i < splices.length; i++) {
         var j;
         var s = splices[i];
-        if (s.removed.length) {
+        if (s.removed.length > 0) {
           for (j = s.index; j < s.removed.length && j < observers.length; j++) {
             observers[j].cancel();
           }
@@ -492,7 +498,7 @@ class CoreList extends PolymerElement {
               s.index, math.min(s.removed.length + s.index, observers.length));
         }
         var newSubscriptions = [];
-        if (s.addedCount) {
+        if (s.addedCount > 0) {
           for (j = s.index; j < s.addedCount; j++) {
             if (data[j] is ObservableList) {
               var o = (data[j] as ObservableList).listChanges.listen(
@@ -690,17 +696,13 @@ class CoreList extends PolymerElement {
       physicalDatum.model = virtualDatum;
       physicalDatum.index = virtualIndex;
       physicalDatum.physicalIndex = physicalIndex;
-      physicalDatum.selected = selectionEnabled && virtualDatum ?
+      physicalDatum.selected = selectionEnabled && virtualDatum != null ?
           _selectedData[virtualDatum] : null;
       // Set group-related fields
       if (_grouped) {
         var groupModel = groups[groupIndex];
         if (groupModel != null) {
-          // Dart Note: Pretty sure the commented lines below is just a bug in
-          // the js code.
-          //  physicalDatum.groupModel =
-          //      _nestedGroups ? groupModel : groupModel.data;
-          physicalDatum.groupModel = groupModel.data;
+          physicalDatum.groupModel = groupModel;
         }
         physicalDatum.groupIndex = groupIndex;
         physicalDatum.groupItemIndex = groupItemIndex;
@@ -781,13 +783,13 @@ class CoreList extends PolymerElement {
     // Measure content in scroller before virtualized items
     if (!identical(_target, this)) {
       var el1 = previousElementSibling;
-      _aboveSize = el1 ? el1.offsetTop + el1.offsetHeight : 0;
+      _aboveSize = el1 != null ? el1.offsetTop + el1.offsetHeight : 0;
     } else {
       _aboveSize = 0;
     }
 
     // Calculate average height
-    if (count) {
+    if (count > 0) {
       totalSize = (_physicalAverage * _physicalAverageCount) + totalSize;
       _physicalAverageCount += count;
       _physicalAverage = (totalSize / _physicalAverageCount).round();
@@ -929,8 +931,8 @@ class CoreList extends PolymerElement {
       // Incremental movement: adjust index by flipping items
       var base = _aboveSize + _physicalOffset;
       var margin = 0.3 * math.max(_physicalSize - _targetSize, _physicalSize);
-      _upperBound = base + margin;
-      _lowerBound = base + _physicalSize - _targetSize - margin;
+      _upperBound = (base + margin).round();
+      _lowerBound = (base + _physicalSize - _targetSize - margin).round();
       var flipBound = _dir > 0 ? _upperBound : _lowerBound;
       if (((_dir > 0 && _scrollTop > flipBound) ||
            (_dir < 0 && _scrollTop < flipBound))) {
@@ -957,7 +959,7 @@ class CoreList extends PolymerElement {
     }
 
     // Assign data to items lazily if scrolling, otherwise force
-    if (_updateItems(!scrollDelta)) {
+    if (_updateItems(scrollDelta == 0)) {
       // Position items after bindings resolve.
       // Dart Note: Polymer has different behavior based on the availability of
       // Object Observers, but we always just use async().
@@ -1041,8 +1043,8 @@ class CoreList extends PolymerElement {
             divider.style.width = '${width * _rowFactor}px';
           }
           _setTransform(divider, 'translate3d(${x}px,${y}px,0)');
-          dividerData.translateX = x;
-          dividerData.translateY = y;
+          dividerData.translateX = x.round();
+          dividerData.translateY = y.round();
         }
         if (_dividerSizes.length > physicalIndex) {
           y += _dividerSizes[physicalIndex];
@@ -1053,8 +1055,8 @@ class CoreList extends PolymerElement {
           physicalItemData.translateY != y) {
         physicalItem.style.opacity = '1';
         _setTransform(physicalItem, 'translate3d(${x}px,${y}px,0)');
-        physicalItemData.translateX = x;
-        physicalItemData.translateY = y;
+        physicalItemData.translateX = x.round();
+        physicalItemData.translateY = y.round();
       }
       // Increment offsets
       lastHeight = (_itemSizes.length > physicalIndex) ?
@@ -1090,7 +1092,7 @@ class CoreList extends PolymerElement {
   void _updateScrollPosition(int scrollTop) {
     var deltaHeight = _virtualStart == 0 ? _physicalOffset :
       math.min(scrollTop + _physicalOffset, 0);
-    if (deltaHeight) {
+    if (deltaHeight != 0) {
       if (adjustPositionAllowed) {
         _scrollTop = setScrollTop(scrollTop - deltaHeight);
       }
@@ -1099,7 +1101,7 @@ class CoreList extends PolymerElement {
   }
 
   // list selection
-  tapHandler(CustomEvent e) {
+  tapHandler(Event e) {
     var n = e.target;
     var p = e.path;
     if (!selectionEnabled || identical(n, this)) return;

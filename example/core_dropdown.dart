@@ -266,7 +266,7 @@ class MyModel {
     const Country('Zimbabwe','ZW'),
   ];
 
-  toggle(CustomEvent e) {
+  toggle(Event e) {
     var dropdown = (e.target as HtmlElement)
         .querySelector('core-dropdown') as CoreDropdown;
     if (dropdown != null) dropdown.toggle();

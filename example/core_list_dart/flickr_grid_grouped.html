@@ -99,7 +99,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- <div style="font-size:4em; text-align:center;">Flickr photos of the world!</div> -->
     <core-list-dart id="list" data="{{data}}" groups="{{groups}}" grid width="202" flex scrollTarget="{{$['scroller']}}">
       <template>
-        <div class="divider" divider>{{groupModel['name']}}</div>
+        <div class="divider" divider>{{groupModel.data['name']}}</div>
         <div class="item">
           <core-image class="photo {{selected ? 'selected' : ''}}" sizing="cover" load?="{{model != null}}" src="https://farm{{model['farm']}}.staticflickr.com/{{model['server']}}/{{model['id']}}_{{model['secret']}}_m.jpg" preload relative>
             <div class="title">{{index}} {{model['title']}}</div>

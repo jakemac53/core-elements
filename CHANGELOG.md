@@ -8,9 +8,6 @@
       on scroll positions for target elements.
     * **Major Update** `core-list-dart` has received a major update. It now
       supports groups of items, grid layouts, and variable height items.
-      **Note**: There is currently a bug when using groups and a flat data list,
-      for now you should favor using nested lists to represent your groups
-      [162](https://github.com/dart-lang/core-elements/issues/162).
     * **Removed** `core-dropdown-overlay` has been removed.
     * **Breaking Change** `core-input` no longer supports the `multiline`
       attribute. It also now extends the `input` element directly, so it should

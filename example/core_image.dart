@@ -7,7 +7,7 @@ class MyModel extends Observable {
   var $;
   MyModel(this.$);
 
-  void preload(MouseEvent e) {
+  void preload(Event e) {
     var target = (e.target as HtmlElement);
     var img = querySelector('#${target.attributes['target']}') as CoreImage;
     var rand = new Random();

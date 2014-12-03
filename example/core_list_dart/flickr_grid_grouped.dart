@@ -261,10 +261,9 @@ class ListTest extends PolymerElement {
           data.add(photos);
           groups.add(new CoreListGroup(data: {'name': country}));
           // Alternate flat data array with group length specified.
-          // TODO(jakemac): Scrolling up can behave weird in this mode.
-//          data.addAll(photos);
-//          groups.add(new CoreListGroup(
-//              length: photos.length, data: {'name': country}));
+          //  data.addAll(photos);
+          //  groups.add(new CoreListGroup(
+          //      length: photos.length, data: {'name': country}));
           $['threshold'].clearLower(true);
           if (moreCount > 0) {
             load(--moreCount);
