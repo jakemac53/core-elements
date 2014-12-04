@@ -78,23 +78,25 @@ class CoreDropdown extends CoreOverlay {
   CoreDropdown.created() : super.created();
   factory CoreDropdown() => new Element.tag('core-dropdown');
 
+  get $ => jsElement[r'$'];
+
   /// The element associated with this dropdown, usually the element that triggers
   /// the menu. If unset, this property will default to the target's parent node
   /// or shadow host.
-  get relatedTarget => jsElement['relatedTarget'];
-  set relatedTarget(value) { jsElement['relatedTarget'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
+  get relatedTarget => jsElement[r'relatedTarget'];
+  set relatedTarget(value) { jsElement[r'relatedTarget'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
 
   /// The horizontal alignment of the popup relative to `relatedTarget`. `left`
   /// means the left edges are aligned together. `right` means the right edges
   /// are aligned together.
-  get halign => jsElement['halign'];
-  set halign(value) { jsElement['halign'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
+  get halign => jsElement[r'halign'];
+  set halign(value) { jsElement[r'halign'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
 
   /// The vertical alignment of the popup relative to `relatedTarget`. `top` means
   /// the top edges are aligned together. `bottom` means the bottom edges are
   /// aligned together.
-  get valign => jsElement['valign'];
-  set valign(value) { jsElement['valign'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
+  get valign => jsElement[r'valign'];
+  set valign(value) { jsElement[r'valign'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
 }
 @initMethod
 upgradeCoreDropdown() => registerDartType('core-dropdown', CoreDropdown);

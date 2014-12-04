@@ -34,17 +34,19 @@ class CoreDropdownMenu extends CoreDropdownBase {
   CoreDropdownMenu.created() : super.created();
   factory CoreDropdownMenu() => new Element.tag('core-dropdown-menu');
 
+  get $ => jsElement[r'$'];
+
   /// A label for the control. The label is displayed if no item is selected.
-  String get label => jsElement['label'];
-  set label(String value) { jsElement['label'] = value; }
+  String get label => jsElement[r'label'];
+  set label(String value) { jsElement[r'label'] = value; }
 
   /// The icon to display when the drop-down is opened.
-  String get openedIcon => jsElement['openedIcon'];
-  set openedIcon(String value) { jsElement['openedIcon'] = value; }
+  String get openedIcon => jsElement[r'openedIcon'];
+  set openedIcon(String value) { jsElement[r'openedIcon'] = value; }
 
   /// The icon to display when the drop-down is closed.
-  String get closedIcon => jsElement['closedIcon'];
-  set closedIcon(String value) { jsElement['closedIcon'] = value; }
+  String get closedIcon => jsElement[r'closedIcon'];
+  set closedIcon(String value) { jsElement[r'closedIcon'] = value; }
 }
 @initMethod
 upgradeCoreDropdownMenu() => registerDartType('core-dropdown-menu', CoreDropdownMenu);

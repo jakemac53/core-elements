@@ -47,7 +47,7 @@ void main() {
           toolbar.append(item);
           return new Future(() {}).then((_) {
             expect(item.getDestinationInsertionPoints()[0].parent,
-                toolbar.jsElement['\$']['topBar']);
+                toolbar.$['topBar']);
           });
         });
         
@@ -57,7 +57,7 @@ void main() {
           toolbar.append(item);
           return new Future(() {}).then((_) {
             expect(item.getDestinationInsertionPoints()[0].parent,
-                toolbar.jsElement['\$']['middleBar']);
+                toolbar.$['middleBar']);
           });
         });
         
@@ -67,7 +67,7 @@ void main() {
           toolbar.append(item);
           return new Future(() {}).then((_) {
             expect(item.getDestinationInsertionPoints()[0].parent,
-                toolbar.jsElement['\$']['bottomBar']);
+                toolbar.$['bottomBar']);
           });
         });
         

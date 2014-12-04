@@ -63,31 +63,33 @@ class CoreScaffold extends HtmlElement with DomProxyMixin {
   CoreScaffold.created() : super.created();
   factory CoreScaffold() => new Element.tag('core-scaffold');
 
+  get $ => jsElement[r'$'];
+
   /// Width of the drawer panel.
-  String get drawerWidth => jsElement['drawerWidth'];
-  set drawerWidth(String value) { jsElement['drawerWidth'] = value; }
+  String get drawerWidth => jsElement[r'drawerWidth'];
+  set drawerWidth(String value) { jsElement[r'drawerWidth'] = value; }
 
   /// When the browser window size is smaller than the `responsiveWidth`,
   /// `core-drawer-panel` changes to a narrow layout. In narrow layout,
   /// the drawer will be stacked on top of the main panel.
-  String get responsiveWidth => jsElement['responsiveWidth'];
-  set responsiveWidth(String value) { jsElement['responsiveWidth'] = value; }
+  String get responsiveWidth => jsElement[r'responsiveWidth'];
+  set responsiveWidth(String value) { jsElement[r'responsiveWidth'] = value; }
 
   /// If true, position the drawer to the right. Also place menu icon to
   /// the right of the content instead of left.
-  bool get rightDrawer => jsElement['rightDrawer'];
-  set rightDrawer(bool value) { jsElement['rightDrawer'] = value; }
+  bool get rightDrawer => jsElement[r'rightDrawer'];
+  set rightDrawer(bool value) { jsElement[r'rightDrawer'] = value; }
 
   /// If true, swipe to open/close the drawer is disabled.
-  bool get disableSwipe => jsElement['disableSwipe'];
-  set disableSwipe(bool value) { jsElement['disableSwipe'] = value; }
+  bool get disableSwipe => jsElement[r'disableSwipe'];
+  set disableSwipe(bool value) { jsElement[r'disableSwipe'] = value; }
 
   /// Used to control the header and scrolling behaviour of `core-header-panel`
-  String get mode => jsElement['mode'];
-  set mode(String value) { jsElement['mode'] = value; }
+  String get mode => jsElement[r'mode'];
+  set mode(String value) { jsElement[r'mode'] = value; }
 
   /// Returns the scrollable element on the main area.
-  get scroller => jsElement['scroller'];
+  get scroller => jsElement[r'scroller'];
 
   /// Toggle the drawer panel
   void togglePanel() =>

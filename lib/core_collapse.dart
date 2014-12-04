@@ -44,36 +44,38 @@ class CoreCollapse extends HtmlElement with DomProxyMixin {
   CoreCollapse.created() : super.created();
   factory CoreCollapse() => new Element.tag('core-collapse');
 
+  get $ => jsElement[r'$'];
+
   /// The target element that will be opened when the `core-collapse` is
   /// opened. If unspecified, the `core-collapse` itself is the target.
-  get target => jsElement['target'];
-  set target(value) { jsElement['target'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
+  get target => jsElement[r'target'];
+  set target(value) { jsElement[r'target'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
 
   /// If true, the orientation is horizontal; otherwise is vertical.
-  bool get horizontal => jsElement['horizontal'];
-  set horizontal(bool value) { jsElement['horizontal'] = value; }
+  bool get horizontal => jsElement[r'horizontal'];
+  set horizontal(bool value) { jsElement[r'horizontal'] = value; }
 
   /// Set opened to true to show the collapse element and to false to hide it.
-  bool get opened => jsElement['opened'];
-  set opened(bool value) { jsElement['opened'] = value; }
+  bool get opened => jsElement[r'opened'];
+  set opened(bool value) { jsElement[r'opened'] = value; }
 
   /// Collapsing/expanding animation duration in second.
-  num get duration => jsElement['duration'];
-  set duration(num value) { jsElement['duration'] = value; }
+  num get duration => jsElement[r'duration'];
+  set duration(num value) { jsElement[r'duration'] = value; }
 
   /// If true, the size of the target element is fixed and is set
   /// on the element.  Otherwise it will try to
   /// use auto to determine the natural size to use
   /// for collapsing/expanding.
-  bool get fixedSize => jsElement['fixedSize'];
-  set fixedSize(bool value) { jsElement['fixedSize'] = value; }
+  bool get fixedSize => jsElement[r'fixedSize'];
+  set fixedSize(bool value) { jsElement[r'fixedSize'] = value; }
 
   /// By default the collapsible element is set to overflow hidden. This helps
   /// avoid element bleeding outside the region and provides consistent overflow
   /// style across opened and closed states. Set this property to true to allow
   /// the collapsible element to overflow when it's opened.
-  bool get allowOverflow => jsElement['allowOverflow'];
-  set allowOverflow(bool value) { jsElement['allowOverflow'] = value; }
+  bool get allowOverflow => jsElement[r'allowOverflow'];
+  set allowOverflow(bool value) { jsElement[r'allowOverflow'] = value; }
 
   /// Toggle the opened state.
   void toggle() =>

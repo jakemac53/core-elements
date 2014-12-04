@@ -18,11 +18,13 @@ class CoreDropdownBase extends HtmlElement with DomProxyMixin {
   CoreDropdownBase.created() : super.created();
   factory CoreDropdownBase() => new Element.tag('core-dropdown-base');
 
-  /// True if the menu is open.
-  bool get opened => jsElement['opened'];
-  set opened(bool value) { jsElement['opened'] = value; }
+  get $ => jsElement[r'$'];
 
-  get dropdown => jsElement['dropdown'];
+  /// True if the menu is open.
+  bool get opened => jsElement[r'opened'];
+  set opened(bool value) { jsElement[r'opened'] = value; }
+
+  get dropdown => jsElement[r'dropdown'];
 }
 @initMethod
 upgradeCoreDropdownBase() => registerDartType('core-dropdown-base', CoreDropdownBase);

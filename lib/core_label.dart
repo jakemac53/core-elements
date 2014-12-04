@@ -35,9 +35,11 @@ class CoreLabel extends HtmlElement with DomProxyMixin {
   CoreLabel.created() : super.created();
   factory CoreLabel() => new Element.tag('core-label');
 
+  get $ => jsElement[r'$'];
+
   /// A query selector string for a "target" element not nested in the `<core-label>`
-  String get htmlFor => jsElement['for'];
-  set htmlFor(String value) { jsElement['for'] = value; }
+  String get htmlFor => jsElement[r'for'];
+  set htmlFor(String value) { jsElement[r'for'] = value; }
 }
 @initMethod
 upgradeCoreLabel() => registerDartType('core-label', CoreLabel);

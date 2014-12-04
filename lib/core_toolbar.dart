@@ -63,22 +63,24 @@ class CoreToolbar extends HtmlElement with DomProxyMixin {
   CoreToolbar.created() : super.created();
   factory CoreToolbar() => new Element.tag('core-toolbar');
 
+  get $ => jsElement[r'$'];
+
   /// Controls how the items are aligned horizontally.
   /// Options are `start`, `center`, `end`, `between` and `around`.
-  String get justify => jsElement['justify'];
-  set justify(String value) { jsElement['justify'] = value; }
+  String get justify => jsElement[r'justify'];
+  set justify(String value) { jsElement[r'justify'] = value; }
 
   /// Controls how the items are aligned horizontally when they are placed
   /// in the middle.
   /// Options are `start`, `center`, `end`, `between` and `around`.
-  String get middleJustify => jsElement['middleJustify'];
-  set middleJustify(String value) { jsElement['middleJustify'] = value; }
+  String get middleJustify => jsElement[r'middleJustify'];
+  set middleJustify(String value) { jsElement[r'middleJustify'] = value; }
 
   /// Controls how the items are aligned horizontally when they are placed
   /// at the bottom.
   /// Options are `start`, `center`, `end`, `between` and `around`.
-  String get bottomJustify => jsElement['bottomJustify'];
-  set bottomJustify(String value) { jsElement['bottomJustify'] = value; }
+  String get bottomJustify => jsElement[r'bottomJustify'];
+  set bottomJustify(String value) { jsElement[r'bottomJustify'] = value; }
 }
 @initMethod
 upgradeCoreToolbar() => registerDartType('core-toolbar', CoreToolbar);

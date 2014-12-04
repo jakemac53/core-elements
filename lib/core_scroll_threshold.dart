@@ -44,33 +44,35 @@ class CoreScrollThreshold extends HtmlElement with DomProxyMixin {
   CoreScrollThreshold.created() : super.created();
   factory CoreScrollThreshold() => new Element.tag('core-scroll-threshold');
 
+  get $ => jsElement[r'$'];
+
   /// When set, the given element is observed for scroll position.  When undefined,
   /// children can be placed inside and element itself can be used as the scrollable
   /// element.
-  String get scrollTarget => jsElement['scrollTarget'];
-  set scrollTarget(String value) { jsElement['scrollTarget'] = value; }
+  String get scrollTarget => jsElement[r'scrollTarget'];
+  set scrollTarget(String value) { jsElement[r'scrollTarget'] = value; }
 
   /// Orientation of the scroller to be observed (`v` for vertical, `h` for horizontal)
-  bool get orient => jsElement['orient'];
-  set orient(bool value) { jsElement['orient'] = value; }
+  bool get orient => jsElement[r'orient'];
+  set orient(bool value) { jsElement[r'orient'] = value; }
 
   /// Distance from the top (or left, for horizontal) bound of the scroller
   /// where the "upper trigger" will fire.
-  get upperThreshold => jsElement['upperThreshold'];
-  set upperThreshold(value) { jsElement['upperThreshold'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
+  get upperThreshold => jsElement[r'upperThreshold'];
+  set upperThreshold(value) { jsElement[r'upperThreshold'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
 
   /// Distance from the bottom (or right, for horizontal) bound of the scroller
   /// where the "lower trigger" will fire.
-  get lowerThreshold => jsElement['lowerThreshold'];
-  set lowerThreshold(value) { jsElement['lowerThreshold'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
+  get lowerThreshold => jsElement[r'lowerThreshold'];
+  set lowerThreshold(value) { jsElement[r'lowerThreshold'] = (value is Map || value is Iterable) ? new JsObject.jsify(value) : value;}
 
   /// Read-only value that tracks the triggered state of the upper threshold
-  bool get upperTriggered => jsElement['upperTriggered'];
-  set upperTriggered(bool value) { jsElement['upperTriggered'] = value; }
+  bool get upperTriggered => jsElement[r'upperTriggered'];
+  set upperTriggered(bool value) { jsElement[r'upperTriggered'] = value; }
 
   /// Read-only value that tracks the triggered state of the lower threshold
-  bool get lowerTriggered => jsElement['lowerTriggered'];
-  set lowerTriggered(bool value) { jsElement['lowerTriggered'] = value; }
+  bool get lowerTriggered => jsElement[r'lowerTriggered'];
+  set lowerTriggered(bool value) { jsElement[r'lowerTriggered'] = value; }
 
   /// Clear the upper threshold, following an `upper-trigger` event.
   void clearUpper(bool waitForMutation) =>

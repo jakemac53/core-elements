@@ -34,16 +34,18 @@ class CoreInput extends InputElement with DomProxyMixin {
   CoreInput.created() : super.created();
   factory CoreInput() => new Element.tag('input', 'core-input');
 
+  get $ => jsElement[r'$'];
+
   /// The "committed" value of the input, ie. the input value when the user
   /// hits the "enter" key or blurs the input after changing the value. You
   /// can bind to this value instead of listening for the "change" event.
   /// Setting this property has no effect on the input value.
-  String get committedValue => jsElement['committedValue'];
-  set committedValue(String value) { jsElement['committedValue'] = value; }
+  String get committedValue => jsElement[r'committedValue'];
+  set committedValue(String value) { jsElement[r'committedValue'] = value; }
 
   /// Set to true to prevent invalid input from being entered.
-  bool get preventInvalidInput => jsElement['preventInvalidInput'];
-  set preventInvalidInput(bool value) { jsElement['preventInvalidInput'] = value; }
+  bool get preventInvalidInput => jsElement[r'preventInvalidInput'];
+  set preventInvalidInput(bool value) { jsElement[r'preventInvalidInput'] = value; }
 
   /// Commits the `value` to `committedValue`
   void commit() =>

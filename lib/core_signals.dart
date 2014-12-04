@@ -31,6 +31,8 @@ import 'package:custom_element_apigen/src/common.dart' show DomProxyMixin;
 class CoreSignals extends HtmlElement with DomProxyMixin {
   CoreSignals.created() : super.created();
   factory CoreSignals() => new Element.tag('core-signals');
+
+  get $ => jsElement[r'$'];
 }
 @initMethod
 upgradeCoreSignals() => registerDartType('core-signals', CoreSignals);
